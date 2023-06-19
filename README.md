@@ -1,4 +1,4 @@
 # Astronomy
-This is my astronomy repository.
+This is my astrodynamics repository.
 
 ## lambert's problem
