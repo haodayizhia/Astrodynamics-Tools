@@ -1,7 +1,7 @@
 %-*- coding: UTF-8 -*-
 % filename.tex
 \documentclass[UTF8]{ctexart}
-\usepackage{amsmath,lmodern}
+\usepackage{amsmath,mathtools,lmodern,cases}
 \title{用到的公式}
 \author{haodayizhia}
 \date{\today}
@@ -9,12 +9,33 @@
 \bibliographystyle{plain}
 
 \begin{document}
+\renewcommand\theequation{%
+\thesection.\arabic{equation}}
 
 \maketitle
 \tableofcontents
 \section{二体问题}
-\begin{equation}
-\vec{a}\times(\vec{b}\times\vec c) =\vec{b}(\vec{a}\cdot\vec{c})-\vec{c}(\vec{a}\cdot\vec{b})
-\end{equation}
+\paragraph{向量公式}
+\begin{gather}
+\vec{a}\times(\vec{b}\times\vec c) =\vec{b}(\vec{a}\cdot\vec{c})-\vec{c}(\vec{a}\cdot\vec{b})\\
+\vec{a}\cdot(\vec{b}\times\vec{c})=(\vec{a}\times\vec{b})\cdot\vec{c}
+\end{gather}
+\paragraph{二体运动轨迹}
+\begin{gather}
+	r=\frac{h^2/\mu}{1+B/\mu\cos \theta}\\
+	r=
+	\begin{cases}
+		a&e=0,\text{圆}\\
+		\frac{p}{1+e\cos\theta}=\frac{a(1-e^2)}{1+e\cos\theta}&0<e<1,\text{椭圆}\\
+		\frac{p}{1\pm e\cos\theta}=\frac{a(1-e^2)}{1\pm e\cos\theta}&1<e,\text{双曲线}\\
+	\end{cases}
+\end{gather}
+
+\[ r=\left\{ \begin{aligned}
+	&\mathrel{\phantom{=}}a e=0,\text{圆}\\
+	&\mathrel{\phantom{=}}\frac{p}{1+e\cos\theta}=\frac{a(1-e^2)}{1+e\cos\theta} 0<e<1,\text{椭圆}\\
+	&\mathrel{\phantom{=}}\frac{p}{1\pm e\cos\theta}=\frac{a(1-e^2)}{1\pm e\cos\theta} 1<e,\text{双曲线}\\
+\end{aligned}
+\right. \]
 \bibliography{math}
 \end{document}
