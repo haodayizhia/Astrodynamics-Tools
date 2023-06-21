@@ -1,8 +1,9 @@
 # Astrodynamics repository
 ## Notes
 - Including formulas and codes.
-## contents
+## Contents
+### two-body problem
+- Conversion between true anomaly, mean anomaly and eccentric anomaly.
 - Conversion between orbit elements and state vectors.
 
-
-- lambert's problem
+### lambert's problem
