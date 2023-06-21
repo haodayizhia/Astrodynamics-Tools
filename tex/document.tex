@@ -16,15 +16,29 @@
 \tableofcontents
 \section{二体问题}
 
-\subsection{向量公式}
+\subsection{核心公式}
+\begin{equation}
+	\ddot{\vec{r}}=-\frac{\mu}{r^3}\vec{r}
+\end{equation}
+
+\subsection{推导用到的向量公式}
 
 \begin{gather}
 \vec{a}\times(\vec{b}\times\vec c) =\vec{b}(\vec{a}\cdot\vec{c})-\vec{c}(\vec{a}\cdot\vec{b})\\
 \vec{a}\cdot(\vec{b}\times\vec{c})=(\vec{a}\times\vec{b})\cdot\vec{c}
 \end{gather}
 
-\subsection{二体运动轨迹}
+\subsection{角动量$\vec{h}$守恒}
+\begin{equation}
+	\vec{h}=\vec{r}\times\dot{\vec{r}}
+\end{equation}
 
+\subsection{近地点方向$\vec{B}$}
+\begin{equation}
+	\dot{\vec{r}}\times\vec{h}=\frac{\mu}{r}\vec{r}+\vec{B}
+\end{equation}
+
+\subsection{运动轨迹}
 \begin{equation}
 	r=\frac{h^2/\mu}{1+B/\mu\cos \theta}\\
 \end{equation}
@@ -36,6 +50,31 @@
 		\frac{p}{1+e\cos\theta}=\frac{a(1-e^2)}{1+e\cos\theta} & 0<e<1,\text{椭圆}\\
 		\frac{p}{1+\cos\theta} & e=1,\text{抛物线}\\
 		\frac{p}{1\pm e\cos\theta}=\frac{a(1-e^2)}{1\pm e\cos\theta} & 1<e,\text{双曲线}
+	\end{cases}
+\end{equation}
+
+\subsection{活力公式}
+\begin{equation}
+	\frac{1}{2}v^2-\frac{\mu}{r}=-\frac{\mu}{2a}
+\end{equation}
+
+\subsection{anomaly转换}
+
+$\theta$: True anomaly(真近点角), $E$: Eccentric anomaly(偏近点角), $M$: Mean anomaly(平近点角).
+
+\begin{gather}
+	a-r=ae\cos E\\
+	M=n(t-\tau)=E-e\sin E
+\end{gather}
+
+\subsection{Conversion between rv and orbit elements}
+\paragraph{$rv$ to $\sigma$}
+\begin{equation}
+	\begin{cases}
+		e=\frac{|\dot{\vec{r}}\times\vec{h}-\frac{\mu}{r}\vec{r}|}{\mu}\\
+		a=\frac{h^2}{\mu(1-e^2)}\\
+		i=\arccos{\frac{\vec{h}\cdot(0,0,1)}{h}}\\
+		\Omega=\arccos\frac{\vec{B}\times\vec{h}\cdot(1,0,0)}{B\cdot h}
 	\end{cases}
 \end{equation}
 
