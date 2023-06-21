@@ -33,7 +33,7 @@
 	\vec{h}=\vec{r}\times\dot{\vec{r}}
 \end{equation}
 
-\subsection{近地点方向$\vec{B}$}
+\subsection{近地点方向$\vec{B}=\mu\vec{e}$}
 \begin{equation}
 	\dot{\vec{r}}\times\vec{h}=\frac{\mu}{r}\vec{r}+\vec{B}
 \end{equation}
@@ -74,7 +74,9 @@ $\theta$: True anomaly(真近点角), $E$: Eccentric anomaly(偏近点角), $M$:
 		e=\frac{|\dot{\vec{r}}\times\vec{h}-\frac{\mu}{r}\vec{r}|}{\mu}\\
 		a=\frac{h^2}{\mu(1-e^2)}\\
 		i=\arccos{\frac{\vec{h}\cdot(0,0,1)}{h}}\\
-		\Omega=\arccos\frac{\vec{B}\times\vec{h}\cdot(1,0,0)}{B\cdot h}
+		\Omega=\arccos\frac{(0,0,1)\times\vec{h}\cdot(1,0,0)}{|(0,0,1)\times\vec{h}|}\\
+		\omega=\arccos\frac{\vec{B}\cdot((0,0,1)\times\vec{h})}{B|(0,0,1)\times\vec{h}|}\\
+		\theta=\arccos\frac{\vec{r}\cdot\vec{B}}{rB}
 	\end{cases}
 \end{equation}
 
