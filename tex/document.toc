@@ -6,5 +6,6 @@
 \contentsline {subsection}{\numberline {1.5}运动轨迹}{2}{subsection.1.5}%
 \contentsline {subsection}{\numberline {1.6}活力公式}{2}{subsection.1.6}%
 \contentsline {subsection}{\numberline {1.7}anomaly转换}{2}{subsection.1.7}%
-\contentsline {subsection}{\numberline {1.8}Conversion between rv and orbit elements}{3}{subsection.1.8}%
-\contentsline {paragraph}{$rv$ to $\sigma $}{3}{paragraph*.2}%
+\contentsline {subsection}{\numberline {1.8}Conversion between rv and classical orbit elements}{3}{subsection.1.8}%
+\contentsline {paragraph}{$rv$ to $\sigma $(注意$\qopname \relax o{arccos}$)}{3}{paragraph*.2}%
+\contentsline {paragraph}{$\sigma $ to $rv$}{3}{paragraph*.3}%

@@ -1,7 +1,7 @@
 %-*- coding: UTF-8 -*-
 % filename.tex
 \documentclass[UTF8]{ctexart}
-\usepackage{amsmath,lmodern,hyperref}
+\usepackage{amsmath,mathtools,lmodern,hyperref}
 \title{用到的公式}
 \author{haodayizhia}
 \date{\today}
@@ -67,8 +67,8 @@ $\theta$: True anomaly(真近点角), $E$: Eccentric anomaly(偏近点角), $M$:
 	M=n(t-\tau)=E-e\sin E
 \end{gather}
 
-\subsection{Conversion between rv and orbit elements}
-\paragraph{$rv$ to $\sigma$}
+\subsection{Conversion between rv and classical orbit elements}
+\paragraph{$rv$ to $\sigma$(注意$\arccos$)}
 \begin{equation}
 	\begin{cases}
 		e=\frac{|\dot{\vec{r}}\times\vec{h}-\frac{\mu}{r}\vec{r}|}{\mu}\\
@@ -77,8 +77,43 @@ $\theta$: True anomaly(真近点角), $E$: Eccentric anomaly(偏近点角), $M$:
 		\Omega=\arccos\frac{(0,0,1)\times\vec{h}\cdot(1,0,0)}{|(0,0,1)\times\vec{h}|}\\
 		\omega=\arccos\frac{\vec{B}\cdot((0,0,1)\times\vec{h})}{B|(0,0,1)\times\vec{h}|}\\
 		\theta=\arccos\frac{\vec{r}\cdot\vec{B}}{rB}
+	\end{cases}or
+\begin{cases}
+	a=-\frac{\mu r}{v^2r-2\mu}\\
+	e=\sqrt{1-\frac{h^2}{\mu a}}\\
+	i=\arccos{\frac{\vec{h}\cdot(0,0,1)}{h}}\\
+	\Omega=\arccos\frac{(0,0,1)\times\vec{h}\cdot(1,0,0)}{|(0,0,1)\times\vec{h}|}\\
+	\omega=\arccos\frac{\vec{B}\cdot((0,0,1)\times\vec{h})}{B|(0,0,1)\times\vec{h}|}\\
+	\theta=\arccos\frac{\vec{r}\cdot\vec{B}}{rB}
+\end{cases}
+\end{equation}
+\paragraph{$\sigma$ to $rv$}
+\begin{equation}
+	\begin{cases}
+		\vec{r}=A\begin{bmatrix}
+			\frac{p}{1+e\cos\theta}\\
+			0\\
+			0
+		\end{bmatrix}\\
+		\vec{v}=A\begin{bmatrix}
+		\frac{he\sin\theta}{p}\\
+		\frac{h(1+e\cos\theta)}{p}\\
+		0
+		\end{bmatrix}\\
+		A=\begin{bmatrix*}[r]
+		\cos(-\Omega) & \sin(-\Omega) & \\
+		-\sin(-\Omega) & \cos(-\Omega) & \\
+		& & 1
+		\end{bmatrix*}\begin{bmatrix*}[r]
+		1 & &\\
+		& \cos(-i) & \sin(-i)\\
+		& -\sin(-i) & \cos(-i)
+		\end{bmatrix*}\begin{bmatrix*}[r]
+		\cos(\omega+\theta) & \sin(\omega+\theta) & \\
+		-\sin(\omega+\theta) & \cos(\omega+\theta) &\\
+		& & 1
+		\end{bmatrix*}
 	\end{cases}
 \end{equation}
-
 \bibliography{math}
 \end{document}
