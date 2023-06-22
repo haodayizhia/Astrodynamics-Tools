@@ -90,6 +90,19 @@ $\theta$: True anomaly(真近点角), $E$: Eccentric anomaly(偏近点角), $M$:
 \paragraph{$\sigma$ to $rv$}
 \begin{equation}
 	\begin{cases}
+			A=\begin{bmatrix}
+			\cos(-\Omega) & \sin(-\Omega) & \\
+			-\sin(-\Omega) & \cos(-\Omega) & \\
+			& & 1
+		\end{bmatrix}\begin{bmatrix}
+			1 & &\\
+			& \cos(-i) & \sin(-i)\\
+			& -\sin(-i) & \cos(-i)
+		\end{bmatrix}\begin{bmatrix}
+			\cos(\omega+\theta) & \sin(\omega+\theta) & \\
+			-\sin(\omega+\theta) & \cos(\omega+\theta) &\\
+			& & 1
+		\end{bmatrix}\\
 		\vec{r}=A\begin{bmatrix}
 			\frac{p}{1+e\cos\theta}\\
 			0\\
@@ -99,20 +112,7 @@ $\theta$: True anomaly(真近点角), $E$: Eccentric anomaly(偏近点角), $M$:
 		\frac{he\sin\theta}{p}\\
 		\frac{h(1+e\cos\theta)}{p}\\
 		0
-		\end{bmatrix}\\
-		A=\begin{bmatrix*}[r]
-		\cos(-\Omega) & \sin(-\Omega) & \\
-		-\sin(-\Omega) & \cos(-\Omega) & \\
-		& & 1
-		\end{bmatrix*}\begin{bmatrix*}[r]
-		1 & &\\
-		& \cos(-i) & \sin(-i)\\
-		& -\sin(-i) & \cos(-i)
-		\end{bmatrix*}\begin{bmatrix*}[r]
-		\cos(\omega+\theta) & \sin(\omega+\theta) & \\
-		-\sin(\omega+\theta) & \cos(\omega+\theta) &\\
-		& & 1
-		\end{bmatrix*}
+		\end{bmatrix}
 	\end{cases}
 \end{equation}
 \bibliography{math}
