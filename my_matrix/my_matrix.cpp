@@ -1,17 +1,7 @@
-#include <iostream>
-#include <vector>
+#include "my_matrix.h"
+
 #include <string>
 #include <sstream>
-
-class my_matrix
-{
-public:
-	my_matrix(std::istream &in);
-	void print() const;
-
-private:
-	std::vector<std::vector<double>> data;
-};
 
 my_matrix::my_matrix(std::istream &in)
 {
