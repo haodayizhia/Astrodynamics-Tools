@@ -1,7 +1,7 @@
 %-*- coding: UTF-8 -*-
 % filename.tex
 \documentclass[UTF8]{ctexart}
-\usepackage{amsmath,mathtools,lmodern,hyperref}
+\usepackage{amsmath,mathtools,lmodern,hyperref, tikz}
 \title{用到的公式}
 \author{haodayizhia}
 \date{\today}
@@ -38,7 +38,7 @@
 	\dot{\vec{r}}\times\vec{h}=\frac{\mu}{r}\vec{r}+\vec{B}
 \end{equation}
 
-\subsection{运动轨迹}
+\subsection[运动轨迹]{运动轨迹\footnote{不包含指向质心的直线降落}}
 \begin{equation}
 	r=\frac{h^2/\mu}{1+B/\mu\cos \theta}=\frac{p}{1+e\cos\theta}\\
 \end{equation}
@@ -52,6 +52,34 @@
 		\frac{a(e^2-1)}{1\pm e\cos\theta} & 1<e,\text{双曲线}
 	\end{cases}
 \end{equation}
+
+以椭圆为例
+
+\begin{center}
+\centering
+\begin{tikzpicture}
+	\draw[black] (0, 0) ellipse(2.5 and 1.545);
+	\draw[fill=black] (-2.5, 0) circle(0.05) node[left]{\footnotesize A};
+	\draw[fill=black] (2.5, 0) circle(0.05) node[right]{\footnotesize B};
+	\draw[fill=black] (0, 0) circle(0.05) node[below]{\footnotesize O};
+	\draw[fill=black] (1.965, 0) circle(0.05) node[above right]{\footnotesize F};
+	\draw[fill=black] (-1.965, 0) circle(0.05) node[above right]{\footnotesize F$^{'}$};
+	\draw[fill=black] (1.965, -0.955) circle(0.05) node[below right]{\footnotesize C};
+	\draw[fill=black] (1.965, 0.955) circle(0.05) node[above right]{\footnotesize D};
+	\draw (-2.5, 0)--(2.5, 0);
+	\draw (1.965, -0.955)--(1.965, 0.955);
+	\draw[dashed] (1.965, 0)--(1.2, 1.355);
+	\draw[fill=green] (1.2, 1.355) circle(0.05) node[above right]{\footnotesize S};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+	F: prime focus, 代表中心天体\quad F$^{'}$: secondary/vacant focus\\
+	AB: major axis, 长度为$2a$\quad F$^{'}$: focal distance, 焦距, 长度为$2c$\\
+	CD: latus rectum, 长度为$2p$\\
+	A: apoapsis(apogee/aphelion/aposelenium)\\
+	B: periapsis(perigee/perihelion/periselenium)
+\end{center}
 
 \subsection{活力公式}
 \begin{equation}
