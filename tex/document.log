@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.9.1)  12 SEP 2023 22:43
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.9.1)  13 SEP 2023 11:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -894,24 +894,32 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 ]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 36.
+(hyperref)                removing `math shift' on input line 37.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mu' on input line 36.
+(hyperref)                removing `math shift' on input line 37.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 36.
+(hyperref)                removing `math shift' on input line 42.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\mu' on input line 42.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 42.
 
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7.52812> on input line 41.
+(Font)              <7.52812> on input line 47.
 LaTeX Font Info:    Font shape `TU/SimSun(0)/m/sl' in size <10.53937> not avail
 able
 (Font)              Font shape `TU/SimSun(0)/m/it' tried instead on input line 
-87.
+84.
 [2]
-Overfull \hbox (82.73079pt too wide) detected at line 145
+Overfull \hbox (82.73079pt too wide) detected at line 152
 [][][][]
  []
 
@@ -921,12 +929,12 @@ LaTeX Warning: Empty `thebibliography' environment on input line 3.
 
 ) [4] (./document.aux)
 Package rerunfilecheck Info: File `document.out' has not changed.
-(rerunfilecheck)             Checksum: 878D5151F0854731C96D80BDC9DA7382;1103.
+(rerunfilecheck)             Checksum: 3AE37F0A96E06851A37A24578B12DF47;1198.
  ) 
 Here is how much of TeX's memory you used:
  25835 strings out of 476179
  561656 string characters out of 5813073
- 866067 words of memory out of 5000000
+ 868173 words of memory out of 5000000
  46124 multiletter control sequences out of 15000+600000
  496937 words of font info for 86 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
