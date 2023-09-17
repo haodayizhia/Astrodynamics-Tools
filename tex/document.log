@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.9.1)  13 SEP 2023 11:59
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.9.1)  14 SEP 2023 17:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -880,18 +880,17 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 \tf@toc=\write5
 \openout5 = `document.toc'.
 
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 31.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 31.
-
-[1
+ [1
 
 ]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 31.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 31.
+
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 37.
@@ -917,27 +916,23 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 LaTeX Font Info:    Font shape `TU/SimSun(0)/m/sl' in size <10.53937> not avail
 able
 (Font)              Font shape `TU/SimSun(0)/m/it' tried instead on input line 
-84.
-[2]
+80.
+[2] [3]
 Overfull \hbox (82.73079pt too wide) detected at line 152
 [][][][]
  []
 
-[3] (./document.bbl
-
-LaTeX Warning: Empty `thebibliography' environment on input line 3.
-
-) [4] (./document.aux)
+(./document.bbl) [4] (./document.aux)
 Package rerunfilecheck Info: File `document.out' has not changed.
-(rerunfilecheck)             Checksum: 3AE37F0A96E06851A37A24578B12DF47;1198.
+(rerunfilecheck)             Checksum: E5D5946FC908A91F6BA52217AFBBD858;1258.
  ) 
 Here is how much of TeX's memory you used:
- 25835 strings out of 476179
- 561656 string characters out of 5813073
- 868173 words of memory out of 5000000
- 46124 multiletter control sequences out of 15000+600000
- 496937 words of font info for 86 fonts, out of 8000000 for 9000
+ 25839 strings out of 476179
+ 561770 string characters out of 5813073
+ 868313 words of memory out of 5000000
+ 46126 multiletter control sequences out of 15000+600000
+ 496945 words of font info for 87 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 100i,14n,104p,411b,560s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 100i,14n,104p,438b,560s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on document.pdf (4 pages).
