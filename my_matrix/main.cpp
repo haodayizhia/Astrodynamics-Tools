@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 	clock_t start, end;
 	start = clock();
 	std::ofstream out("a.txt");
-	int num = 10;
+	int num = 100;
 	for (int i = 0; i < num; ++i)
 	{
 		for (int j = 0; j < num; ++j)
@@ -19,6 +19,6 @@ int main(int argc, char *argv[])
 	my_matrix mmtrix(in);
 	std::cout << mmtrix.mol() << std::endl;
 	end = clock();
-	std::cout << "it takes " << (end - start) / CLOCKS_PER_SEC << " s" << std::endl;
+	std::cout << "it takes " << double(end - start) / CLOCKS_PER_SEC << " s" << std::endl;
 	return 0;
 }
