@@ -10,20 +10,24 @@ class my_matrix
 public:
 	my_matrix() = default;
 	my_matrix(std::istream &in);
+	my_matrix(std::vector<std::vector<double>> d) : data(d) {}
+	// 打印矩阵
 	void print() const;
-	std::vector<std::vector<double>>::size_type rol() const { return data.size(); }; // 计算行数
+	// 计算行数
+	std::vector<std::vector<double>>::size_type rol() const { return data.size(); };
+	// 计算列数
 	std::vector<double>::size_type col() const
 	{
 		if (data.empty())
 			return 0;
 		else
 			return data[0].size();
-	}; // 计算列数
+	};
 	// 矩阵叉乘
 	my_matrix cross(const my_matrix &m) const;
 	// 求模
 	double mol() const;
-	double mol2() const;
+	// double mol2() const;
 
 private:
 	std::vector<std::vector<double>> data;

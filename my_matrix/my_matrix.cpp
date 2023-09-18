@@ -62,7 +62,7 @@ my_matrix my_matrix::cross(const my_matrix &m) const
 	}
 	return result;
 }
-double process(const std::vector<std::vector<double>> &data, std::vector<double> now = std::vector<double>(0))
+/* double process(const std::vector<std::vector<double>> &data, std::vector<double> now = std::vector<double>(0))
 {
 	double res = 0;
 	size_t past = 0;
@@ -91,7 +91,7 @@ double my_matrix::mol2() const
 	if (col() != rol())
 		std::cerr << "fault mol" << std::endl;
 	return process(data);
-}
+} */
 double my_matrix::mol() const
 {
 	double result = 1;

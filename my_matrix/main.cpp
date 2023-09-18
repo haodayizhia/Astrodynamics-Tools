@@ -7,11 +7,11 @@ int main(int argc, char *argv[])
 	clock_t start, end;
 	start = clock();
 	std::ofstream out("a.txt");
-	int num = 100;
+	int num = 10;
 	for (int i = 0; i < num; ++i)
 	{
 		for (int j = 0; j < num; ++j)
-			out << (double(rand()%300))/500 << ' ';
+			out << (double(rand() % 300)) / 500 << ' ';
 		out << std::endl;
 	}
 	out.close();
