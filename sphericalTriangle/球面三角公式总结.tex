@@ -15,6 +15,7 @@
 \maketitle
 
 \tdplotsetmaincoords{60}{110}
+\begin{center}
 \begin{tikzpicture}[scale=4,tdplot_main_coords]
 	
 	% VARIABLES
@@ -24,6 +25,7 @@
 	
 	% AXES
 	\coordinate (O) at (0,0,0);
+	\draw[fill=black] (O) circle(0.01cm) node[left] {$O$};
 	\draw[thick,->] (0,0,0) -- (1,0,0) node[below left=-3]{$x$};
 	\draw[thick,->] (0,0,0) -- (0,1,0) node[right=-1]{$y$};
 	\draw[thick,->] (0,0,0) -- (0,0,1) node[above=-1]{$z$};
@@ -34,29 +36,39 @@
 	] (0,0,0) circle (1cm);
 	
 	% draw arcs
-	\tdplotsetrotatedcoords{0}{0}{30};
+	\tdplotsetrotatedcoords{0}{0}{0};
 	\draw[tdplot_rotated_coords,gray] (0.342,-0.94,0) arc (-70:110:1);
 	\draw[dashed,tdplot_rotated_coords,gray] (-0.342,0.94,0) arc (110:290:1);
 	
 	
 	% VECTORS
-	\tdplotsetcoord{P}{\rvec}{\thetavec}{\phivec}
-	\draw[->, red] (O)  -- (P) node[above right=-2] {P};
-	\draw[dashed,red]   (O)  -- (Pxy);
-	\draw[dashed,red]   (P)  -- (Pxy);
-	\draw[dashed,red]   (Py) -- (Pxy);
+	\tdplotsetcoord{C}{\rvec}{\thetavec}{\phivec}
+	\draw[->, red] (O)  -- (C) node[above right=-2] {C};
+%	\draw[dashed,red]   (O)  -- (Pxy);
+%	\draw[dashed,red]   (P)  -- (Pxy);
+%	\draw[dashed,red]   (Py) -- (Pxy);
 	\tdplotsetcoord{B}{1}{60}{60}
 	\draw[->, red] (O) -- (B) node[above right=-2] {B};
 	\tdplotsetcoord{A}{1}{75}{30}
 	\draw[->, red] (O) -- (A) node[above right=-2] {A};
 	
 	% ARCS
-	\tdplotdrawarc[->]{(O)}{0.2}{0}{\phivec}
-	{anchor=north}{$\phi$}
-	\tdplotsetthetaplanecoords{\phivec}
-	\tdplotdrawarc[->,tdplot_rotated_coords]{(0,0,0)}{0.4}{0}{\thetavec}
-	{anchor=south west}{\hspace{-1mm}$\theta$}
+%	\tdplotdrawarc[->]{(O)}{0.2}{0}{\phivec}
+%	{anchor=north}{$\phi$}
+%	\tdplotsetthetaplanecoords{\phivec}
+%	\tdplotdrawarc[->,tdplot_rotated_coords]{(0,0,0)}{0.4}{0}{\thetavec}
+%	{anchor=south west}{\hspace{-1mm}$\theta$}
+	% AB弧
+	\tdplotsetrotatedcoords{-81.206}{36.53}{115.744};
+	\draw[tdplot_rotated_coords,gray] (1, 0, 0) arc (0:31.367:1);
+	% AP弧
+	\tdplotsetrotatedcoords{-62.192}{81.876}{105.156};
+	\draw[tdplot_rotated_coords,gray] (1, 0, 0) arc (0:62.192:1);
+	% PB弧
+	\tdplotsetrotatedcoords{150}{90}{195};
+	\draw[tdplot_rotated_coords,gray] (1, 0, 0) arc (0:45:1);
 \end{tikzpicture}
+\end{center}
 
 \begin{figure}[ht]
 	\centering

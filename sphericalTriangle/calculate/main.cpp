@@ -1,4 +1,4 @@
-// 计算三维空间坐标系旋转
+// 计算三维空间坐标系旋转,逆时针画v1到v2的弧
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -33,16 +33,24 @@ double mol(const std::vector<double> &v)
 int main(int argc, char *argv[])
 {
     // 新坐标系的xy平面的两个向量v1,v2
-    std::vector<double> v1 = convert1({1, 75, 30});
+    std::vector<double> v1 = convert1({1, 15, 60});
     std::vector<double> v2 = convert1({1, 60, 60});
     // 法向量z
     std::vector<double> z = cross(v1, v2);
+    // 向量v1到v2的夹角
+    double delta = z[2] >= 0 ? acos(dot(v1, v2) / mol(v1) / mol(v2)) : 2 * pi - acos(dot(v1, v2) / mol(v1) / mol(v2));
+    if (z[2] < 0)
+        z = {-z[0], -z[1], -z[2]};
     // 倾角i
-    double i = acos(dot(z, {0, 0, 1}));
+    double i = acos(dot(z, {0, 0, 1}) / mol(z));
     // 升交点方向
     std::vector<double> vomega = cross({0, 0, 1}, z);
     // 升交点经度
-    double omega = vomega[1] > 0 ? acos(dot(vomega, {1, 0, 0})) : 2 * pi - acos(dot(vomega, {1, 0, 0}));
+    double omega = vomega[1] > 0 ? acos(dot(vomega, {1, 0, 0}) / mol(vomega)) : 2 * pi - acos(dot(vomega, {1, 0, 0}) / mol(vomega));
     // 需要绕z轴逆时针旋转的角度a1
-    std::cout << convert2(-8) << std::endl;
+    double a1 = omega - pi / 2;
+    // 绕y轴逆时针旋转i后，需要绕z轴逆时针旋转的角度a2
+    double a2 = pi / 2 + (cross(vomega, v1)[2] >= 0 ? acos(dot(vomega, v1) / mol(vomega) / mol(v1)) : 2 * pi - acos(dot(vomega, v1) / mol(vomega) / mol(v1)));
+    std::cout << a1 / pi * 180 << ' ' << i / pi * 180 << ' ' << a2 / pi * 180 << ' ' << delta / pi * 180 << std::endl;
+    return 0;
 }
