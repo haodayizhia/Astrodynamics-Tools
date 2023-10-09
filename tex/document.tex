@@ -14,7 +14,7 @@
 
 \maketitle
 \tableofcontents
-\section{二体问题}
+\section{二体问题}\label{二体问题}
 
 \subsection{核心公式}
 \begin{equation}
@@ -152,5 +152,43 @@ $\theta$: True anomaly(真近点角), $E$: Eccentric anomaly(偏近点角), $M$:
 \end{equation}
 
 \section{定轨}
+
+\section{解析解}
+\subsection{经典摄动法}
+根据第\ref{二体问题}章, 无摄运动的解的形式为(其中$c_1,c_2,c_3,c_4,c_5,c_6$为常数)
+\begin{gather}\label{eq:3.14}
+	\boldsymbol{r}=\boldsymbol{f}(c_1,c_2,c_3,c_4,c_5,c_6,t)\\
+	\label{eq:3.15}
+	\dot{\boldsymbol{r}}=\boldsymbol{g}(c_1,c_2,c_3,c_4,c_5,c_6,t)
+\end{gather}
+
+而受摄二体问题运动方程的一般形式:
+\begin{gather}
+	\ddot{\boldsymbol{r}}=\boldsymbol{F}_0(\boldsymbol{r})+\boldsymbol{F}_1(\boldsymbol{r},\dot{\boldsymbol{r}},t;\varepsilon)\\
+	\boldsymbol{F}_0(\boldsymbol{r})=-\frac{\mu}{r^2}(\frac{\boldsymbol{r}}{r})
+\end{gather}
+
+利用求解常微分方程中的常数变易法,保持\eqref{eq:3.14}和\eqref{eq:3.15}解的形式不变,令$c_1,c_2,c_3,c_4,c_5,c_6$是与时间相关的变量,满足
+\[
+	\left.
+	\begin{gathered}
+		\sum_{i=1}^{6}\frac{\partial \boldsymbol{f}}{\partial c_i}\frac{dc_i}{dt}=0\\
+		\sum_{i=1}^{6}\frac{\partial \boldsymbol{g}}{\partial c_i}\frac{dc_i}{dt}=\boldsymbol{F}_1
+	\end{gathered}\right\}\tag{\stepcounter{equation}\theequation}
+\]
+
+\subsection{平均根数法}
+构造根数$\sigma=(a,e,i,\Omega,\omega,M_0)^T$解的形式
+\begin{equation}
+\begin{cases}
+	\sigma(t)=\bar{\sigma}(t)+\sigma^{(1)}_l(t)+\sigma^{(2)}_l(t)+\cdots+\sigma^{(1)}_s(t)+\sigma^{(2)}_s(t)+\cdots\\
+	\bar{\sigma}(t)=\bar{\sigma}^{(0)}(t)+\sigma_1(t-t_0)+\sigma_2(t-t_0)+\cdots\\
+	\bar{\sigma}^{(0)}(t)=\bar{\sigma}_0+\textcolor{red}{\delta\bar{n}}(t-t_0)\\
+	\bar{\sigma}_0=\sigma_0-[\sigma^{(1)}_l(t_0)+\sigma^{(2)}_l(t_0)+\cdots+\sigma^{(1)}_s(t_0)+\sigma^{(2)}_s(t_0)+\cdots]
+\end{cases}
+\end{equation}
+
+其中$\delta=(0,0,0,0,0,1)^T$
+
 \bibliography{math}
 \end{document}

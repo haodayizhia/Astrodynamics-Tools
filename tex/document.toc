@@ -8,6 +8,9 @@
 \contentsline {subsection}{\numberline {1.7}活力公式}{3}{subsection.1.7}%
 \contentsline {subsection}{\numberline {1.8}anomaly转换}{3}{subsection.1.8}%
 \contentsline {subsection}{\numberline {1.9}Conversion between rv and classical orbit elements}{4}{subsection.1.9}%
-\contentsline {paragraph}{$rv$ to $\sigma $(注意$\qopname \relax o{arccos}$)}{4}{paragraph*.2}%
+\contentsline {paragraph}{$rv$ to $\sigma $(注意$\arccos $)}{4}{paragraph*.2}%
 \contentsline {paragraph}{$\sigma $ to $rv$}{4}{paragraph*.3}%
 \contentsline {section}{\numberline {2}定轨}{4}{section.2}%
+\contentsline {section}{\numberline {3}解析解}{4}{section.3}%
+\contentsline {subsection}{\numberline {3.1}经典摄动法}{4}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}平均根数法}{5}{subsection.3.2}%
