@@ -1,4 +1,4 @@
-# Convert Keplerian Orbital Elements to a State Vector
+# Convert a State Vector to Keplerian Orbital Elements
 ## 程序说明
 计算弧度没有确保输入的余弦值在$[-1,1]$范围内，可能导致由于浮点数精度导致的错误。
 ```cpp
