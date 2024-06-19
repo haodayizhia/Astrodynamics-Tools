@@ -1,7 +1,7 @@
 // 绕地rv转换为轨道根数
 #include <vector>
 #include <math.h>
-double mu = 3.986005e14;
+double mu = 3.986005e5;
 double norm(std::vector<double> vec)
 {
     return sqrt(pow(vec.at(0), 2) + pow(vec.at(1), 2) + pow(vec.at(2), 2));

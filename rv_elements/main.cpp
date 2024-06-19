@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <fstream>
 #include <sstream>
@@ -6,7 +7,7 @@
 int main(int argc, char *argv[])
 {
     std::ifstream file("MEME_799500932_STARLINK-31920_1520146_Operational_1401414420_UNCLASSIFIED.txt");
-    std::ofstream ofile("1.txt");
+    std::ofstream ofile("res/MEME_799500932_STARLINK-31920_1520146_Operational_1401414420_UNCLASSIFIED_eles.txt");
     std::string line;
     for (int i = 0; i < 4; ++i)
     {
@@ -33,7 +34,9 @@ int main(int argc, char *argv[])
     {
         // std::vector<double> row = {(*iterator).front()};
         std::vector<double> eles = rv2eles(std::vector<double>((*iterator).begin() + 1, (*iterator).end()));
-        fprintf(ofile, "%.3f", (*iterator).front());
+        ofile << std::fixed << std::setprecision(6);
+        ofile << (*iterator).front();
+        // ofile << std::defaultfloat << std::setprecision(6);
         for (auto i : eles)
             ofile << ' ' << i;
         ofile << std::endl;
