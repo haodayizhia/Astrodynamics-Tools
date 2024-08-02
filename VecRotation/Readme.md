@@ -1,4 +1,4 @@
-# 三维空间中向量$\boldsymbol{v}$绕向量$\boldsymbol{u}$旋转$\theta$角
+# 三维空间中向量 $\boldsymbol{v}$ 绕向量 $\boldsymbol{u}$ 旋转 $\theta$ 角
 * 旋转矩阵
 
 令$\hat{\boldsymbol{u}}$为向量$\boldsymbol{u}$的单位向量，
