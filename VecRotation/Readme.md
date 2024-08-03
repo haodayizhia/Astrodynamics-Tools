@@ -4,7 +4,7 @@
 令 $\hat{\boldsymbol{u}}$ 为向量 $\boldsymbol{u}$ 的单位向量，
 
 <p align="center">
-<img src="image1.png" alt="图1" width="300px"/>
+<img src="image1.png" alt="图1" width="400px"/>
 </p>
 
 $$
