@@ -1,4 +1,5 @@
 # 三维空间中向量 $\boldsymbol{v}$ 绕向量 $\boldsymbol{u}$ 旋转 $\theta$ 角
+
 * 旋转矩阵
 
 令 $\hat{\boldsymbol{u}}$ 为向量 $\boldsymbol{u}$ 的单位向量，
@@ -55,6 +56,8 @@ $$
 $$\boldsymbol{R}=\boldsymbol{r_1}\boldsymbol{r_2}\boldsymbol{r_3}\boldsymbol{r_4}\boldsymbol{r_5}$$
 
 $$\boldsymbol{v}_{rot}=\boldsymbol{R}\boldsymbol{v}$$
+
+附：绕固定轴的外旋和以相反顺序绕运动轴内旋的最终姿态相同。
 
 * [罗德里格旋转公式（Rodrigues' rotation formula）](https://www.cnblogs.com/wtyuan/p/12324495.html)
 
