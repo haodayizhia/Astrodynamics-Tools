@@ -23,9 +23,10 @@ download_fun() {
         echo downloading $LINK
         UTC=${LINK%UTC*}
         UTC=${UTC:0-10}
-        curl --cookie cookies.txt https://www.space-track.org/publicfiles/query/class/download?name=$LINK --output ../${UTC:0:4}${UTC:5:2}/${LINK//:/_}
+        curl --cookie cookies.txt -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36" https://www.space-track.org/publicfiles/query/class/download?name=$LINK --output ../${UTC:0:4}${UTC:5:2}/${LINK//:/_}
         # 下载并将:改为_,最大超时时间600s,超时后重试3次，自动断点续传
-        # curl --cookie cookies.txt --max-time 600 --retry 3 -C - https://www.space-track.org/publicfiles/query/class/download?name=$LINK --output ../$(date +"%Y%m")/${LINK//:/_}
+        # curl --cookie cookies.txt --retry 3 --retry-delay 2 --max-time 600 -C - -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36" https://www.space-track.org/publicfiles/query/class/download?name=$LINK --output ../${UTC:0:4}${UTC:5:2}/${LINK//:/_}
+        
         # if [ -f ../$(date +"%Y%m")/${LINK//:/_} ]; then
         #     mv ../$(date +"%Y%m")/${LINK//:/_} ../$(date +"%Y%m")/$LINK
         # fi
