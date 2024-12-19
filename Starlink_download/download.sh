@@ -19,14 +19,48 @@ echo "开始执行脚本，按 CTRL+C 中断"
 
 # 下载函数
 download_fun() {
+    # 下载第几个文件
+    # declare -i count=0
+    # 下载时刻序列
+    # time_serials=()
     for LINK in $(echo $1); do
-        echo downloading $LINK
+        # 记录下载时刻
+        # time_serials[count]=$(date +%s)
+        # 如果下载错误，耗时小于5s，暂停300s，重置cookies
+        # if ((count > 0)) && ((time_serials[count] - time_serials[count - 1] < 5)); then
+        #     sleep 300
+        #     curl -c cookies.txt -b cookies.txt https://www.space-track.org/ajaxauth/login -d 'identity=trliu@pmo.ac.cn&password=123456789abcdef' >/dev/null
+        #     time_serials[count]=$(date +%s)
+        # fi
+        # echo $(date -d @${time_serials[count]}) downloading $LINK
+
+        # 下载开始时间
+        time_beg=$(date +%s)
+        echo $(date -d @${time_beg}) downloading $LINK
         UTC=${LINK%UTC*}
         UTC=${UTC:0-10}
-        curl --cookie cookies.txt -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36" https://www.space-track.org/publicfiles/query/class/download?name=$LINK --output ../${UTC:0:4}${UTC:5:2}/${LINK//:/_}
+
+        # 如果15分钟内下载超过10个文件, 暂停等过15分钟
+        # if ((count > 8)); then
+        #     elapsed_time=$((time_serials[count] - time_serials[count - 9]))
+        #     if ((elapsed_time < 900)); then
+        #         sleep $((900 - elapsed_time))
+        #     fi
+        # fi
+
+        # 最大下载时间20分钟 --max-time 1200
+        curl --cookie cookies.txt -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36" --max-time 1200 https://www.space-track.org/publicfiles/query/class/download?name=$LINK --output ../${UTC:0:4}${UTC:5:2}/${LINK//:/_}
+        # count+=1
+        # 下载结束时间
+        time_end=$(date +%s)
+        # 如如果下载错误，耗时小于5s，暂停600s，重置cookies
+        if ((time_end - time_beg < 5)); then
+            sleep 600
+            curl -c cookies.txt -b cookies.txt https://www.space-track.org/ajaxauth/login -d 'identity=trliu@pmo.ac.cn&password=123456789abcdef' >/dev/null
+        fi
         # 下载并将:改为_,最大超时时间600s,超时后重试3次，自动断点续传
         # curl --cookie cookies.txt --retry 3 --retry-delay 2 --max-time 600 -C - -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36" https://www.space-track.org/publicfiles/query/class/download?name=$LINK --output ../${UTC:0:4}${UTC:5:2}/${LINK//:/_}
-        
+
         # if [ -f ../$(date +"%Y%m")/${LINK//:/_} ]; then
         #     mv ../$(date +"%Y%m")/${LINK//:/_} ../$(date +"%Y%m")/$LINK
         # fi
@@ -94,7 +128,7 @@ then
             UTC=${UTC:0-10}
             dir=${UTC:0:4}${UTC:5:2}
             if [ -f ../$dir/${LINK//:/_} ]; then
-                if unzip -t ../$dir/${LINK//:/_} >/dev/null; then
+                if unzip -t ../$dir/${LINK//:/_} >/dev/null 2>&1; then
                     echo ../$dir/$LINK good
                     dl=$(echo "$dl" | grep -v $LINK)
                     awk -v i="$i" 'NR==i {$2="good"} 1' log/download.txt >log/downloadTemp.txt && mv log/downloadTemp.txt log/download.txt

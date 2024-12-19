@@ -3,7 +3,7 @@
 
 echo -n >log/badlist.txt # 清空错误列表
 dl='log/download.txt'    # 默认检查download.txt列表
-delete=1                 # 默认不删除错误下载
+delete=0                 # 默认删除错误下载
 for arg in "$@"; do
     if [ "$arg" == "-d" ]; then
         delete=0
