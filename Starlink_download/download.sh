@@ -53,10 +53,9 @@ download_fun() {
         # count+=1
         # 下载结束时间
         time_end=$(date +%s)
-        # 如如果下载错误，耗时小于5s，暂停600s，重置cookies
+        # 如如果下载错误，耗时小于5s，暂停600s
         if ((time_end - time_beg < 5)); then
             sleep 600
-            curl -c cookies.txt -b cookies.txt https://www.space-track.org/ajaxauth/login -d 'identity=trliu@pmo.ac.cn&password=123456789abcdef' >/dev/null
         fi
         # 下载并将:改为_,最大超时时间600s,超时后重试3次，自动断点续传
         # curl --cookie cookies.txt --retry 3 --retry-delay 2 --max-time 600 -C - -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36" https://www.space-track.org/publicfiles/query/class/download?name=$LINK --output ../${UTC:0:4}${UTC:5:2}/${LINK//:/_}
@@ -88,17 +87,41 @@ then
     dl=$(echo $fl | grep -o \"[^],[]*\")
     dl=$(echo $dl | grep -o "[^\"]*zip")
     # 如果文件夹存在，排除已下载，否则创建文件夹
-    for LINK in $(echo $dl); do
+    updated_dl=""
+    for LINK in $dl; do
         UTC=${LINK%UTC*}
         UTC=${UTC:0-10}
-        if [ -d ../${UTC:0:4}${UTC:5:2} ]; then
-            if [ -f ../${UTC:0:4}${UTC:5:2}/${LINK//:/_} ]; then
-                dl=$(echo "$dl" | grep -v $LINK)
+        DIR="../${UTC:0:4}${UTC:5:2}"
+        FILE="${DIR}/${LINK//:/_}"
+        if [ -d "$DIR" ]; then
+            if [ ! -f "$FILE" ]; then
+                updated_dl+="$LINK"$'\n'
             fi
         else
-            mkdir ../${UTC:0:4}${UTC:5:2}
+            mkdir -p "$DIR"
+            updated_dl+="$LINK"$'\n'
         fi
     done
+    dl=$(sed '$d' <<<$updated_dl)
+
+    # 不用循环，改为子进程的写法，注意子进程的变量修改不会反映到主进程，所以要用这种写法
+    # updated_dl=""
+    # updated_dl=echo "$dl" | while read -r LINK; do
+    #     UTC=${LINK%UTC*}
+    #     UTC=${UTC:0-10}
+    #     DIR="../${UTC:0:4}${UTC:5:2}"
+    #     FILE="${DIR}/${LINK//:/_}"
+    #     if [ -d "$DIR" ]; then
+    #         if [ ! -f "$FILE" ]; then
+    #             echo $LINK
+    #         fi
+    #     else
+    #         mkdir -p "$DIR"
+    #         echo $LINK
+    #     fi
+    # done
+    # dl=$updated_dl
+
     echo ---downloading---
     # for i in $(ls ../$(date +"%Y%m")); do
     #     # 将文件名中的_替换回:字符
@@ -116,7 +139,7 @@ then
     #         mv ../$(date +"%Y%m")/${LINK//:/_} ../$(date +"%Y%m")/$LINK
     #     fi
     # done
-    again=3
+    again=1
     while [ "$again" != "0" ]; do
         # 保存本次下载列表备用
         echo "$dl" >log/download.txt
@@ -143,8 +166,12 @@ then
             fi
             i+=1
         done
-        ((again--))
+        # ((again--))
+        # if [ -z "$dl" ]; then again=0; fi
+
+        # 如果dl为空，下载完成
         if [ -z "$dl" ]; then again=0; fi
+
         # echo 'Download again? if yes input 0, else input 1'
         # read -t 60 again
     done
