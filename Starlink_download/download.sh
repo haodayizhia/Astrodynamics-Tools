@@ -19,44 +19,50 @@ echo "开始执行脚本，按 CTRL+C 中断"
 
 # 下载函数
 download_fun() {
-    # 下载第几个文件
-    # declare -i count=0
-    # 下载时刻序列
-    # time_serials=()
     for LINK in $(echo $1); do
-        # 记录下载时刻
-        # time_serials[count]=$(date +%s)
+        DIR="../${UTC:0:4}${UTC:5:2}"
+        FILE="${DIR}/${LINK//:/_}"
+
         # 如果下载错误，耗时小于5s，暂停300s，重置cookies
         # if ((count > 0)) && ((time_serials[count] - time_serials[count - 1] < 5)); then
         #     sleep 300
         #     curl -c cookies.txt -b cookies.txt https://www.space-track.org/ajaxauth/login -d 'identity=trliu@pmo.ac.cn&password=123456789abcdef' >/dev/null
         #     time_serials[count]=$(date +%s)
         # fi
-        # echo $(date -d @${time_serials[count]}) downloading $LINK
 
         # 下载开始时间
-        time_beg=$(date +%s)
-        echo $(date -d @${time_beg}) downloading $LINK
+        # time_beg=$(date +%s)
+        # echo $(date -d @${time_beg}) downloading $LINK
+
         UTC=${LINK%UTC*}
         UTC=${UTC:0-10}
+        # 记录下载时刻
+        time_serials[count]=$(date +%s)
+        # 如果15分钟内下载超过10个文件，暂停等过15分钟，重置cookies
+        if ((count > 8)); then
+            elapsed_time=$((time_serials[count] - time_serials[count - 9]))
+            if ((elapsed_time < 900)); then
+                sleep $((900 - elapsed_time))
+                curl -c cookies.txt -b cookies.txt https://www.space-track.org/ajaxauth/login -d 'identity=trliu@pmo.ac.cn&password=123456789abcdef' >/dev/null
+                time_serials[count]=$(date +%s)
+            fi
+        fi
+        echo $(date -d @${time_serials[count]}) downloading $LINK
+        # 最大下载时间20分钟 --max-time 1200
+        curl --cookie cookies.txt -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36" --max-time 1200 https://www.space-track.org/publicfiles/query/class/download?name=$LINK --output $FILE
+        # 下载超时删除
+        if [ $? -ne 0 ]; then
+            rm -f $FILE
+        fi
+        count+=1
 
-        # 如果15分钟内下载超过10个文件, 暂停等过15分钟
-        # if ((count > 8)); then
-        #     elapsed_time=$((time_serials[count] - time_serials[count - 9]))
-        #     if ((elapsed_time < 900)); then
-        #         sleep $((900 - elapsed_time))
-        #     fi
+        # 下载结束时间
+        # time_end=$(date +%s)
+        # 如如果下载错误，耗时小于10s，暂停600s
+        # if ((time_end - time_beg < 10)); then
+        #     sleep 600
         # fi
 
-        # 最大下载时间20分钟 --max-time 1200
-        curl --cookie cookies.txt -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36" --max-time 1200 https://www.space-track.org/publicfiles/query/class/download?name=$LINK --output ../${UTC:0:4}${UTC:5:2}/${LINK//:/_}
-        # count+=1
-        # 下载结束时间
-        time_end=$(date +%s)
-        # 如如果下载错误，耗时小于5s，暂停600s
-        if ((time_end - time_beg < 5)); then
-            sleep 600
-        fi
         # 下载并将:改为_,最大超时时间600s,超时后重试3次，自动断点续传
         # curl --cookie cookies.txt --retry 3 --retry-delay 2 --max-time 600 -C - -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36" https://www.space-track.org/publicfiles/query/class/download?name=$LINK --output ../${UTC:0:4}${UTC:5:2}/${LINK//:/_}
 
@@ -88,17 +94,19 @@ then
     dl=$(echo $dl | grep -o "[^\"]*zip")
     # 如果文件夹存在，排除已下载，否则创建文件夹
     updated_dl=""
+    declare -A dir_cache
     for LINK in $dl; do
         UTC=${LINK%UTC*}
         UTC=${UTC:0-10}
         DIR="../${UTC:0:4}${UTC:5:2}"
         FILE="${DIR}/${LINK//:/_}"
-        if [ -d "$DIR" ]; then
-            if [ ! -f "$FILE" ]; then
-                updated_dl+="$LINK"$'\n'
-            fi
-        else
+        # 缓存目录检查结果
+        if [ -z "${dir_cache[$DIR]}" ]; then
             mkdir -p "$DIR"
+            dir_cache[$DIR]=1
+        fi
+        # 检查文件是否存在
+        if [ ! -f "$FILE" ]; then
             updated_dl+="$LINK"$'\n'
         fi
     done
@@ -139,7 +147,12 @@ then
     #         mv ../$(date +"%Y%m")/${LINK//:/_} ../$(date +"%Y%m")/$LINK
     #     fi
     # done
-    again=1
+
+    again=10
+    # 第几次下载
+    declare -i count=0
+    # 下载时刻序列
+    time_serials=()
     while [ "$again" != "0" ]; do
         # 保存本次下载列表备用
         echo "$dl" >log/download.txt
@@ -166,11 +179,11 @@ then
             fi
             i+=1
         done
-        # ((again--))
-        # if [ -z "$dl" ]; then again=0; fi
+        ((again--))
+        if [ -z "$dl" ]; then again=0; fi
 
         # 如果dl为空，下载完成
-        if [ -z "$dl" ]; then again=0; fi
+        # if [ -z "$dl" ]; then again=0; fi
 
         # echo 'Download again? if yes input 0, else input 1'
         # read -t 60 again
