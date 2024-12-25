@@ -5,9 +5,11 @@
 cleanup() {
     echo ""
     echo "捕获到 CTRL+C (SIGINT)"
-    if [ -n "$current_ac_timeout" ]; then
-        powercfg -change standby-timeout-ac $current_ac_timeout
-        echo "休眠时间调回$current_ac_timeout分钟,请手动运行check.sh检查"
+    if [ -n "$current_standby_timeout" ] && [ -n "$current_hibernate_timeout" ]; then
+        powercfg -change standby-timeout-ac $current_standby_timeout
+        powercfg -change hibernate-timeout-ac $current_hibernate_timeout
+        echo "将睡眠时间调回$current_standby_timeout 分钟,将休眠时间调回$current_hibernate_timeout 分钟"
+        echo "请手动运行check.sh检查"
     fi
     # bash check.sh -d
     exit
@@ -79,12 +81,19 @@ curl -c cookies.txt -b cookies.txt https://www.space-track.org/ajaxauth/login -d
 if
     fl=$(curl --cookie cookies.txt https://www.space-track.org/publicfiles/query/class/files)
 then
-    # 如果在windows系统，插入电源下载时不休眠
+    # 如果在windows系统，插入电源下载时不睡眠和休眠
     if uname -s | grep -q 'MINGW\|MSYS' || [ "$OS" = "Windows_NT" ] || [[ "$OSTYPE" == "msys"* || "$OSTYPE" == "mingw"* ]]; then
-        current_ac_timeout=$(($(powercfg -query SCHEME_CURRENT SUB_SLEEP STANDBYIDLE | grep "当前交流电源设置索引" | awk -F ': ' '{print $2}' | tr -d ' ') / 60))
-        if [ -n "$current_ac_timeout" ]; then
+        current_standby_timeout=$(($(powercfg -query SCHEME_CURRENT SUB_SLEEP STANDBYIDLE | grep "当前交流电源设置索引" | awk -F ': ' '{print $2}' | tr -d ' ') / 60))
+        current_hibernate_timeout=$(($(powercfg -query SCHEME_CURRENT SUB_SLEEP HIBERNATEIDLE | grep "当前交流电源设置索引" | awk -F ': ' '{print $2}' | tr -d ' ') / 60))
+        if [ -n "$current_standby_timeout" ] && [ -n "$current_hibernate_timeout" ]; then
+            # 修改显示器关闭时间和休眠时间为 0（禁用）
             powercfg -change standby-timeout-ac 0
-            echo "检测到windows,插入电源下载时不休眠"
+            powercfg -change hibernate-timeout-ac 0
+            echo "检测到Windows系统, 当前设置："
+            echo "睡眠时间：$current_standby_timeout 分钟 -> 0 分钟"
+            echo "休眠时间：$current_hibernate_timeout 分钟 -> 0 分钟"
+        else
+            echo "无法检测到当前电源设置索引，请检查系统配置。"
         fi
     fi
     echo $(date) >>log/filelist.txt
@@ -189,10 +198,11 @@ then
         # read -t 60 again
     done
     echo ---end---
-    # 将休眠时间调回15分钟
-    if [ -n "$current_ac_timeout" ]; then
-        powercfg -change standby-timeout-ac $current_ac_timeout
-        echo "将休眠时间调回$current_ac_timeout分钟"
+    # 将睡眠和休眠时间调回15分钟
+    if [ -n "$current_standby_timeout" ] && [ -n "$current_hibernate_timeout" ]; then
+        powercfg -change standby-timeout-ac $current_standby_timeout
+        powercfg -change hibernate-timeout-ac $current_hibernate_timeout
+        echo "将休眠时间调回$current_standby_timeout 分钟,将休眠时间调回$current_hibernate_timeout 分钟"
     fi
 else
     echo false
