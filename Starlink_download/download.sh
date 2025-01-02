@@ -21,7 +21,9 @@ echo "开始执行脚本，按 CTRL+C 中断"
 
 # 下载函数
 download_fun() {
-    for LINK in $(echo $1); do
+    for LINK in $1; do
+        UTC=${LINK%UTC*}
+        UTC=${UTC:0-10}
         DIR="../${UTC:0:4}${UTC:5:2}"
         FILE="${DIR}/${LINK//:/_}"
 
@@ -36,8 +38,6 @@ download_fun() {
         # time_beg=$(date +%s)
         # echo $(date -d @${time_beg}) downloading $LINK
 
-        UTC=${LINK%UTC*}
-        UTC=${UTC:0-10}
         # 记录下载时刻
         time_serials[count]=$(date +%s)
         # 如果15分钟内下载超过10个文件，暂停等过15分钟，重置cookies
@@ -202,7 +202,7 @@ then
     if [ -n "$current_standby_timeout" ] && [ -n "$current_hibernate_timeout" ]; then
         powercfg -change standby-timeout-ac $current_standby_timeout
         powercfg -change hibernate-timeout-ac $current_hibernate_timeout
-        echo "将休眠时间调回$current_standby_timeout 分钟,将休眠时间调回$current_hibernate_timeout 分钟"
+        echo "将休眠时间调回 $current_standby_timeout 分钟,将休眠时间调回 $current_hibernate_timeout 分钟"
     fi
 else
     echo false
