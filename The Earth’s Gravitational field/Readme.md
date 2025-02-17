@@ -1,7 +1,9 @@
 # The Earth’s Gravitational field
 
 ## Gravitational force
+
 The Gravitational force between two particles with point mass $M$ at position $\mathbf{r}_0$ and $m$ at position $\mathbf{r}$ separated by a distance r is an attraction along a line join the particles:
+
 $$
 F=\left|\left|\mathbf{F}\right|\right|=G\frac{Mm}{r^2}
 $$
@@ -9,6 +11,7 @@ $$
 $G$ is the universal gravitational constant: $G=6.673\times10^{-11}\mathrm{m}^3\mathrm{kg}^{-1}\mathrm{s}^{-2}$.
 
 So, When considering the Earth as a point mass $M$ located at the origin, the gravitational force exerted on a point mass $m$ at a position vector $\mathbf{r}$ relative to the center of the Earth is given by:
+
 $$
 \mathbf{F}=m\mathbf{g}=-G\frac{Mm}{\left|\mathbf{r}\right|^3}\mathbf{r}
 $$
