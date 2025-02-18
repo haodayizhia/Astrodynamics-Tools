@@ -8,7 +8,7 @@ $$
 F=\left|\left|\mathbf{F}\right|\right|=G\frac{Mm}{r^2}
 $$
 
-$G$ is the universal gravitational constant: $G=6.673\times10^{-11}\mathrm{m}^3\mathrm{kg}^{-1}\mathrm{s}^{-2}$.
+$G$ is the universal gravitational constant: $G=6.674\times10^{-11}\mathrm{m}^3\mathrm{kg}^{-1}\mathrm{s}^{-2}$.
 
 So, When considering the Earth as a point mass $M$ located at the origin, the gravitational force exerted on a point mass $m$ at a position vector $\mathbf{r}$ relative to the center of the Earth is given by:
 
