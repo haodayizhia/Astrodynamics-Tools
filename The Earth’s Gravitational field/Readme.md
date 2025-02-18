@@ -39,3 +39,5 @@ Vice versa
 $$
 \mathbf{g}=-\frac{GM}{r^2}\hat{\mathbf{r}}=\frac{\partial}{\partial \mathbf{r}}\left(\frac{GM}{r}\right)=-\frac{\partial}{\partial \mathbf{r}}U=-\mathrm{grad}U=-\nabla U
 $$
+
+The gravitational acceleration of a spherically symmetric mass distribution, at a point _outside_ the mass, is the same as the acceleration obtained by concentrating all mass at the center of the sphere, i.e., a point mass.
