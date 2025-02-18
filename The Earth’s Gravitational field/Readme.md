@@ -34,6 +34,8 @@ U=\int _{\mathbf{r} _{ref}}^\mathbf{r}-\mathbf{g}\cdot d\mathbf{r}=\int _{\mathb
 =-\frac{GM}{r}
 $$
 
+Vice versa
+
 $$
-\mathbf{g}=-\frac{GM}{r^2}\hat{\mathbf{r}}=
+\mathbf{g}=-\frac{GM}{r^2}\hat{\mathbf{r}}=\frac{\partial}{\partial \mathbf{r}}\left(\frac{GM}{r}\right)=-\frac{\partial}{\partial \mathbf{r}}U=-\mathrm{grad}U=-\nabla U
 $$
