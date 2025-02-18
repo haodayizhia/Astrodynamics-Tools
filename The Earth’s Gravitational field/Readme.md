@@ -30,10 +30,14 @@ $$
 > Gravitational potential can also be understood as the work done to move a unit point mass $m$ from the reference zero potential at $\mathbf{r}_{ref}$ to $\mathbf{r}$, overcoming the gravitational force.
 
 $$
-U=\int_{\mathbf{r}_{ref}}^\mathbf{r}-\mathbf{g}\cdot d\mathbf{r}=\int_{\mathbf{r}\_{ref}}^\mathbf{r}\frac{GM}{r^2}\hat{\mathbf{r}}\cdot d\mathbf{r}=\int_\infty^r\frac{GM}{r^2}dr
+U=\int_{\boldsymbol{r}_{ref}}^\mathbf{r}-\mathbf{g}\cdot d\mathbf{r}=\int_{\mathbf{r}\_{ref}}^\mathbf{r}\frac{GM}{r^2}\hat{\mathbf{r}}\cdot d\mathbf{r}=\int_\infty^r\frac{GM}{r^2}dr
 =-\frac{GM}{r}
 $$
 
 $$
 \mathbf{g}=-\frac{GM}{r^2}\hat{\mathbf{r}}=
+$$
+
+$$
+\boldsymbol{a}_{dasd}+\mathbf{a}_{dsad}
 $$
