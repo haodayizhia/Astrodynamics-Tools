@@ -37,7 +37,3 @@ $$
 $$
 \mathbf{g}=-\frac{GM}{r^2}\hat{\mathbf{r}}=
 $$
-
-$$
-\boldsymbol{a}_{dasd}+\mathbf{a}_{dsad}
-$$
