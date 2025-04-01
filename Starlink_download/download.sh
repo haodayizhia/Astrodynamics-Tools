@@ -44,8 +44,8 @@ download_fun() {
         if ((count > 8)); then
             elapsed_time=$((time_serials[count] - time_serials[count - 9]))
             if ((elapsed_time < 900)); then
-                sleep $((900 - elapsed_time))
-                curl -c cookies.txt -b cookies.txt https://www.space-track.org/ajaxauth/login -d 'identity=trliu@pmo.ac.cn&password=123456789abcdef' >/dev/null
+                sleep $((1200 - elapsed_time))
+                curl -c cookies.txt -b cookies.txt https://www.space-track.org/ajaxauth/login -d 'identity=a1278640985@gmail.com&password=123456789abcdef' >/dev/null
                 time_serials[count]=$(date +%s)
             fi
         fi
@@ -76,7 +76,7 @@ download_fun() {
 
 echo ---begin---
 bash check.sh -d >/dev/null 2>&1
-curl -c cookies.txt -b cookies.txt https://www.space-track.org/ajaxauth/login -d 'identity=trliu@pmo.ac.cn&password=123456789abcdef' >/dev/null
+curl -c cookies.txt -b cookies.txt https://www.space-track.org/ajaxauth/login -d 'identity=a1278640985@gmail.com&password=123456789abcdef' >/dev/null
 # 访问文件列表并判断是否访问成功
 if
     fl=$(curl --cookie cookies.txt https://www.space-track.org/publicfiles/query/class/files)
