@@ -83,8 +83,8 @@ if
 then
     # 如果在windows系统，插入电源下载时不睡眠和休眠
     if uname -s | grep -q 'MINGW\|MSYS' || [ "$OS" = "Windows_NT" ] || [[ "$OSTYPE" == "msys"* || "$OSTYPE" == "mingw"* ]]; then
-        current_standby_timeout=$(($(powercfg -query SCHEME_CURRENT SUB_SLEEP STANDBYIDLE | grep "当前交流电源设置索引" | awk -F ': ' '{print $2}' | tr -d ' ') / 60))
-        current_hibernate_timeout=$(($(powercfg -query SCHEME_CURRENT SUB_SLEEP HIBERNATEIDLE | grep "当前交流电源设置索引" | awk -F ': ' '{print $2}' | tr -d ' ') / 60))
+        current_standby_timeout=$(($(powercfg -query SCHEME_CURRENT SUB_SLEEP STANDBYIDLE | findstr "当前交流电源设置索引" | awk -F ': ' '{print $2}' | tr -d ' ') / 60))
+        current_hibernate_timeout=$(($(powercfg -query SCHEME_CURRENT SUB_SLEEP HIBERNATEIDLE | findstr "当前交流电源设置索引" | awk -F ': ' '{print $2}' | tr -d ' ') / 60))
         if [ -n "$current_standby_timeout" ] && [ -n "$current_hibernate_timeout" ]; then
             # 修改显示器关闭时间和休眠时间为 0（禁用）
             powercfg -change standby-timeout-ac 0
