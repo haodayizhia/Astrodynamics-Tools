@@ -1,6 +1,6 @@
 ﻿# PowerShell 5.1 for Starlink Downloader with Progress and Thread Cleanup
 # ------- 配置 -------
-$baseDir = "E:\Starlink"
+$baseDir = "E:\eph"
 $logDir = "$baseDir\logs"
 $manifestUrl = "https://api.starlink.com/public-files/ephemerides/MANIFEST.txt"
 $manifestPath = "$baseDir\MANIFEST.txt"
