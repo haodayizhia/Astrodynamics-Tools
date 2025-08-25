@@ -173,10 +173,12 @@ main() {
             # 验证日期格式是否正确
             if ! [[ $cycle_tag =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}UTC[0-9]{2}_[0-9]{2}_[0-9]{2}$ ]]; then
                 echo "Error: Invalid manifest file format. Expected format: MANIFEST_YYYY-MM-DDUTCHH_MM_SS.txt" >&2
+                cleanup_jobs
                 exit 1
             fi
         else
             echo "Error: Provided manifest path does not exist: $manifest_path" >&2
+            cleanup_jobs
             exit 1
         fi
     else
@@ -191,6 +193,7 @@ main() {
             echo "Manifest file downloaded successfully to: $manifest_path"
         else
             echo "Error: Failed to download manifest file from $MANIFEST_URL" >&2
+            cleanup_jobs
             exit 1
         fi
     fi
@@ -260,9 +263,10 @@ main() {
         [[ ! -v DOWNLOADED_FILES["$file"] ]] && new_files+=("$file")
     done
     TOTAL_FILES=${#new_files[@]}
+    echo "New files to download: $TOTAL_FILES"
     
     if [[ $TOTAL_FILES -gt 0 ]]; then
-        echo "New files to download: $TOTAL_FILES"
+
         echo -e "\nStarting high-performance parallel download, max concurrent: $THROTTLE_LIMIT"
         echo "Current cycle: $cycle_tag"
         echo "Download directory: $download_dir"
