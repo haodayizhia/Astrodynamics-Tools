@@ -290,7 +290,7 @@ main() {
             done
             
             # 测试版，可能会有进程时间太久已被系统回收？或者进程已经完成但未被捕获
-            while(( batch_completed_count < 1 )); do
+            # while(( batch_completed_count < 1 )); do
                 for idx in "${!BACKGROUND_PIDS[@]}"; do
                     if ! kill -0 "${BACKGROUND_PIDS[idx]}" 2>/dev/null; then
                         if wait "${BACKGROUND_PIDS[idx]}" 2>/dev/null; then
@@ -299,8 +299,8 @@ main() {
                         unset 'BACKGROUND_PIDS[idx]'    # 可以考虑吧反向遍历避免索引错位
                     fi
                 done
-                sleep 0.1  # 减少 CPU 占用
-            done
+                sleep 0.5  # 减少 CPU 占用
+            # done
             
             # wait -n # bash 4.3+ 支持，等待任意一个后台任务完成，未完成
             
