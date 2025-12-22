@@ -23,16 +23,33 @@ echo "--- 任务开始 ---" >> $LOGFILE
 # --- 循环执行直到成功 ---
 
 result="Failed"
-while [[ "$result" == *Failed* ]]; do
+# while [[ "$result" == *Failed* ]]; do
+while [[ "$result" != *successfully* ]]; do
     echo "[$(date '+%Y-%m-%d %H:%M:%S')]" >> $LOGFILE
     # 主命令：输出到文件+管道
     result=$(/e/Starlink_downloader/mine2.sh | grep --line-buffered -E 'date|now|Script|Download completed' | tee -a "$LOGFILE")
     
     # 检查捕获的输出中是否包含 "Failed"
-    if [[ "$result" == *Failed* ]]; then
-        echo "检测到 'Failed'，任务将在5分钟后重试..." >> $LOGFILE
-        sleep 300  # 暂停5分钟
+    # if [[ "$result" == *Failed* ]]; then
+    #     echo "检测到 'Failed'，任务将在5分钟后重试..." >> $LOGFILE
+    #     sleep 300  # 暂停5分钟
+    # fi
+    
+    if [[ "$result" == *successfully* ]]; then
+        break
     fi
+    if [[ "$result" == *Failed* ]]; then
+        echo "检测到 'Failed'，任务将在 5 分钟后重试..." >> $LOGFILE
+        sleep 300  # 暂停5分钟
+    else
+        echo "MANIFEST.txt 尚未更新，任务将在 10 分钟后重试..." >> $LOGFILE
+        sleep 600  # 暂停10分钟
+    fi
+    
+    # if [[ "$result" == *Failed* ]]; then
+    #     echo "检测到 'Failed'，任务将在5分钟后重试..." >> $LOGFILE
+    #     sleep 300  # 暂停5分钟
+    # fi
 done
 
 echo "--- 任务完成 ---" >> $LOGFILE
