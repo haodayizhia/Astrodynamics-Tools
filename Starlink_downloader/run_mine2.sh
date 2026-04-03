@@ -42,8 +42,8 @@ while [[ "$result" != *successfully* ]]; do
         echo "检测到 'Failed'，任务将在 5 分钟后重试..." >> $LOGFILE
         sleep 300  # 暂停5分钟
     else
-        echo "MANIFEST.txt 尚未更新，任务将在 10 分钟后重试..." >> $LOGFILE
-        sleep 600  # 暂停10分钟
+        echo "MANIFEST.txt 尚未更新，任务将在 20 分钟后重试..." >> $LOGFILE
+        sleep 1200  # 暂停20分钟
     fi
     
     # if [[ "$result" == *Failed* ]]; then
